@@ -24,7 +24,7 @@ class CustomerController {
 
     @GetMapping("/{id}")
     fun getCustomer(@PathVariable id: String) : CustomerModel {
-        return customers.filter { it.id == id }.first()
+        return customers.first { it.id == id }
     }
 
     @PostMapping
