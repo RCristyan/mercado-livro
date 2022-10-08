@@ -21,14 +21,14 @@ class CustomerService {
         return customers.first { it.id == id }
     }
 
-    fun createCustomer(customer : PostCustomerRequest) {
+    fun createCustomer(customer : CustomerModel) {
         val id = if(customers.isEmpty()){
             1
         } else {
             customers.last().id.toInt() + 1
         }.toString()
 
-        customers.add(CustomerModel(id, customer.nome, customer.email))
+        customers.add(customer)
     }
 
     fun update(id: String, customer : PutCustomerRequest) {
