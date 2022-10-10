@@ -9,13 +9,12 @@ class CustomerService(
     val customerRepository: CustomerRepository
 ) {
 
-    val customers = mutableListOf<CustomerModel>()
-
     fun getAll(nome : String?) : List<CustomerModel> {
         nome?.let {
-            return customers.filter { it.nome.contains(nome, ignoreCase = true) }
+            return customerRepository.findByNomeContaining(it)
         }
-        return customers
+
+        return customerRepository.findAll().toList()
     }
 
     fun getCustomer(id: Int) : CustomerModel {
