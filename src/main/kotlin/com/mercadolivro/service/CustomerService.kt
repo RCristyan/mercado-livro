@@ -27,10 +27,11 @@ class CustomerService(
     }
 
     fun update(customer : CustomerModel) {
-        customers.first { it.id == customer.id }.let {
-            it.nome = customer.nome
-            it.email = customer.email
+        if(!customerRepository.existsById(customer.id!!)){
+            throw Exception()
         }
+
+        customerRepository.save(customer)
     }
 
     fun delete(id: Int) {
