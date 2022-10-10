@@ -35,7 +35,11 @@ class CustomerService(
     }
 
     fun delete(id: Int) {
-        customers.removeIf { it.id == id }
+        if(!customerRepository.existsById(id)){
+            throw Exception()
+        }
+
+        customerRepository.deleteById(id)
     }
 
 }
