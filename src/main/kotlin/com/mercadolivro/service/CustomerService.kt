@@ -19,7 +19,7 @@ class CustomerService(
     }
 
     fun getCustomer(id: Int) : CustomerModel {
-        return customers.first { it.id == id }
+        return customerRepository.findById(id).orElseThrow()
     }
 
     fun createCustomer(customer : CustomerModel) {
