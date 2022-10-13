@@ -1,6 +1,7 @@
 package com.mercadolivro.controller
 
 import com.mercadolivro.controller.request.PostBookRequest
+import com.mercadolivro.controller.request.PutBookRequest
 import com.mercadolivro.extension.toBookModel
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.service.BookService
@@ -41,5 +42,12 @@ class BookController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Int) {
         bookService.delete(id)
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun update(@PathVariable id: Int, @RequestBody book: PutBookRequest) {
+        val savedBook = bookService.findById(id)
+        bookService.update(book.toBookModel(savedBook))
     }
 }
