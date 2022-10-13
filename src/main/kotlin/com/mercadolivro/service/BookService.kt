@@ -20,4 +20,8 @@ class BookService(
     fun findActives(): List<BookModel> {
         return bookRepository.findByStatus(BookStatus.ATIVO)
     }
+
+    fun findById(id: Int): BookModel {
+        return bookRepository.findById(id).orElseThrow()
+    }
 }
