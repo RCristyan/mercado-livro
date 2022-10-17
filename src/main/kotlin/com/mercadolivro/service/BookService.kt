@@ -20,8 +20,8 @@ class BookService(
         return bookRepository.findAll(pageable)
     }
 
-    fun findActives(): List<BookModel> {
-        return bookRepository.findByStatus(BookStatus.ATIVO)
+    fun findActives(pageable: Pageable): Page<BookModel> {
+        return bookRepository.findByStatus(BookStatus.ATIVO, pageable)
     }
 
     fun findById(id: Int): BookModel {

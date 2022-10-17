@@ -33,8 +33,8 @@ class BookController(
     }
 
     @GetMapping("/active")
-    fun findActives(): List<BookResponse> {
-        return bookService.findActives().map { it.toResponse() }
+    fun findActives(@PageableDefault(page=0, size=10) pageable: Pageable): Page<BookResponse> {
+        return bookService.findActives(pageable).map { it.toResponse() }
     }
 
     @GetMapping("/{id}")
