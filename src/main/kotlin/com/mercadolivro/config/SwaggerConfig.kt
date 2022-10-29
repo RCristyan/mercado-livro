@@ -1,5 +1,7 @@
 package com.mercadolivro.config
 
+import org.flywaydb.core.Flyway
+import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.ApiInfoBuilder
@@ -25,5 +27,17 @@ class SwaggerConfig {
             .description("Api do Mercado Livro")
             .build()
         )
+
+    @Bean
+    fun cleanMigrationStrategy(): FlywayMigrationStrategy{
+        val strategy = FlywayMigrationStrategy(){
+            @Override
+            fun migrate(flyway: Flyway){
+                flyway.repair()
+                flyway.migrate()
+            }
+        }
+        return strategy
+    }
 
 }
