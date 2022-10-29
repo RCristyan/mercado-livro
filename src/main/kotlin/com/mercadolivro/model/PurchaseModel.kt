@@ -38,5 +38,5 @@ data class PurchaseModel(
     val preco: BigDecimal,
 
     @Column(name = "criado_em")
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 )
