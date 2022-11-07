@@ -5,6 +5,7 @@ import com.mercadolivro.controller.request.PutCustomerRequest
 import com.mercadolivro.controller.response.CustomerResponse
 import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.extension.toResponse
+import com.mercadolivro.model.BookModel
 import com.mercadolivro.service.CustomerService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -27,6 +28,11 @@ class CustomerController(
     @GetMapping("/{id}")
     fun getCustomer(@PathVariable id: Int) : CustomerResponse {
         return customerService.findById(id).toResponse()
+    }
+
+    @GetMapping("/{id}/purchased_books")
+    fun getPurchasedBooks(@PathVariable id: Int): List<BookModel> {
+        return customerService.getPurchasedBooks(id)
     }
 
     @PostMapping

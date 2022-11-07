@@ -44,6 +44,10 @@ class BookService(
         bookRepository.save(book)
     }
 
+    fun findByCustomer(customer: CustomerModel): List<BookModel> {
+        return bookRepository.findByCustomer(customer)
+    }
+
     fun deleteByCustomer(customer: CustomerModel) {
         val books = bookRepository.findByCustomer(customer)
 
