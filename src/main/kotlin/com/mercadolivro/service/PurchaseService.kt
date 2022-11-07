@@ -1,6 +1,9 @@
 package com.mercadolivro.service
 
+import com.mercadolivro.enums.BookStatus
+import com.mercadolivro.enums.Errors
 import com.mercadolivro.events.PurchaseEvent
+import com.mercadolivro.exception.BadRequestException
 import com.mercadolivro.model.PurchaseModel
 import com.mercadolivro.repository.PurchaseRepository
 import org.springframework.context.ApplicationEventPublisher
@@ -13,6 +16,10 @@ class PurchaseService(
 ) {
 
     fun create(purchaseModel: PurchaseModel){
+        if(purchaseModel.books.any { it.status != BookStatus.ATIVO }) {
+            throw BadRequestException(Errors.ML103.message, Errors.ML103.code)
+        }
+
         purchaseRepository.save(purchaseModel)
 
         applicationEventPublisher.publishEvent(PurchaseEvent(this, purchaseModel))
