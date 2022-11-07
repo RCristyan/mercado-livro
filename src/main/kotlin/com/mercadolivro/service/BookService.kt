@@ -67,4 +67,8 @@ class BookService(
         bookRepository.saveAll(books)
     }
 
+    fun findSold(pageable: Pageable): Page<BookModel> {
+        return bookRepository.findByStatus(BookStatus.VENDIDO, pageable)
+    }
+
 }
